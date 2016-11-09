@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<title>处理售后添加数据</title>
+	</head>
+	<body>
+		<%
+			String clientName=
+			new String(requst.getParmeter("clientName")
+			.getBytes("ISO=8859-1"),"UTF-8");
+			String clientOpinion=
+			new String(requst.getParmeter("clientOpinion")
+			.getBytes("ISO=8859-1"),"UTF-8");
+			String StaffName=
+			new String(requst.getParmeter("StaffName")
+			.getBytes("ISO=8859-1"),"UTF-8");
+			Connection con=null;
+			Statement st=null;
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			String url="jdbc:mysql://localhost:3306/eims
+			?useUnicode=true&characterEncoding=gbk";
+			con=DriverManger.getConnetion(url,"root","admin");
+			st=con.createStatement();
+			String sql="insert into cs(clientName,clientOpinion,StaffName) values"
+			('"+clientName+"','"+cliOpinion+"','"+StaffName+"')";
+			st.executeUpdate(sql);
+			response.sendRedirect("http://localhost:8084/EIMS/
+			CSManage/lookCS.jsp");
+		   }
+		   catch(Exception e){
+		   			e.printStackTrace();
+		   			}
+		   finally{
+		   	e.prinStackTrace();
+		   }
+			finally{
+				st.close();
+				con.close();
+				}
+		%>
+	</body>
+</html>
